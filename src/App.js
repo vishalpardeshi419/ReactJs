@@ -49,14 +49,14 @@ const person = {
   ...this.state.person[personIndex]
 };
 
-const person  = Object.assign({}, this.state.persons[personIndex]);
+// const person  = Object.assign({}, this.state.persons[personIndex]);
 
-this.setState({
-    person : [
-      {name : event.target.value, age: 28},
-      {name : event.target.value, age: 12}
-    ]
-  })
+person.name = event.target.value;
+
+const persons = [...this.state.person]
+persons[personIndex] = person;
+
+this.setState({ person : persons})
 }
 
 togglePersonsHandler = () =>  {
@@ -96,7 +96,7 @@ if (this.state.showPersons) {
           name={person.name}
           age = {person.age}
           key = {person.id} 
-          changed={() => this.nameChangeHandler}/>
+          changed={(event) => this.nameChangeHandler(event, person.id)}/>
         })
       }      
     </div>
