@@ -5,6 +5,7 @@ import './App.css';
 // import { CardList } from '/components/card-list/card-list.component';
 
 import Demo from './components/Person/Demo';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
 // constructor() {
@@ -91,12 +92,13 @@ if (this.state.showPersons) {
     <div>
       {
         this.state.person.map((person, index) => {
-          return <Demo 
+        return <ErrorBoundary key = {person.id}>
+          <Demo 
           click={() => this.deletePersonsHandler(index)}
           name={person.name}
-          age = {person.age}
-          key = {person.id} 
+          age = {person.age}           
           changed={(event) => this.nameChangeHandler(event, person.id)}/>
+        </ErrorBoundary>
         })
       }      
     </div>
